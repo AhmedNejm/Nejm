@@ -16,10 +16,18 @@ jobs:
         with:
           channel: stable
 
-      - name: Create Android project
+      - name: Save Nejm files
         run: |
-          flutter create --platforms=android .
-          git checkout -- pubspec.yaml lib/main.dart
+          cp lib/main.dart /tmp/main.dart
+          cp pubspec.yaml /tmp/pubspec.yaml
+
+      - name: Create Android project
+        run: flutter create --platforms=android .
+
+      - name: Restore Nejm files
+        run: |
+          cp /tmp/main.dart lib/main.dart
+          cp /tmp/pubspec.yaml pubspec.yaml
 
       - name: Get dependencies
         run: flutter pub get
