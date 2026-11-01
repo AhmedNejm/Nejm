@@ -17,7 +17,9 @@ jobs:
           channel: stable
 
       - name: Create Android project
-        run: flutter create --platforms=android .
+        run: |
+          flutter create --platforms=android .
+          git checkout -- pubspec.yaml lib/main.dart
 
       - name: Get dependencies
         run: flutter pub get
